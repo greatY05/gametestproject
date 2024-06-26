@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckacn1eecetef"]
+
+[ext_resource type="Script" path="res://scenes/window.gd" id="1_djach"]
+[ext_resource type="Texture2D" uid="uid://ebg0blo8ubtb" path="res://icon.svg" id="1_f2ruv"]
+
+[node name="Window" type="Window"]
+position = Vector2i(0, 36)
+size = Vector2i(240, 320)
+unresizable = true
+always_on_top = true
+min_size = Vector2i(240, 320)
+max_size = Vector2i(240, 320)
+script = ExtResource("1_djach")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Button" type="Button" parent="Camera2D"]
+offset_right = 121.0
+offset_bottom = 31.0
+icon = ExtResource("1_f2ruv")
+flat = true
+
+[node name="comboTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="pressed" from="Camera2D/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="comboTimer" to="." method="_on_combo_timer_timeout"]
