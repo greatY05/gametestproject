@@ -11,7 +11,7 @@ func restart():
 	get_tree().reload_current_scene()
 
 const speed = 0.1
-func _process(delta):
+func _process(_delta):
 	if isCollected == true:
 		key.global_position = key.global_position.lerp($player/followPoint.global_position, speed) 
 	if isCollected == false and gateUnlocked == true:
@@ -27,13 +27,13 @@ func _on_switch_body_entered(body):
 		if switchPressed == false:
 			switchPressed = true
 			print(switchPressed)
-			#3jesdfd
+			#3jesdfdjryhffhfhngdjdgngn
 			$switch/switchSprite.play("on")
 			$gateArea/doorCollision.set_deferred("disabled", true)
 			$gateArea/gatesprites.play("open")
 
 
-func _on_switch_body_exited(body):
+func _on_switch_body_exited(_body):
 	print($switch.get_overlapping_bodies())
 	if $switch.get_overlapping_bodies().size() < 1:
 		switchPressed = false
@@ -50,7 +50,7 @@ func _on_key_body_entered(body):
 		$key/keyColl.set_deferred("disabled", true)
 
 var gateUnlocked = false
-func _on_unlock_area_body_entered(body):
+func _on_unlock_area_body_entered(_body):
 	if isCollected == true:
 		gateUnlocked = true
 		isCollected = false
