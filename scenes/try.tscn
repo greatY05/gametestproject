@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://eddaw7cwa61"]
+
+[ext_resource type="Texture2D" uid="uid://ebg0blo8ubtb" path="res://icon.svg" id="1_1csni"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="2_xbtdk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_xbtdk")
+strenght = 100.0
+fade = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.5, -1.5)
+scale = Vector2(9.03906, 5.03906)
+texture = ExtResource("1_1csni")

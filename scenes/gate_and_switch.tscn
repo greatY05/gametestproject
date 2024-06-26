@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://do37y8fe27hbp"]
+
+[ext_resource type="Script" path="res://scripts/gateAndSwitch.gd" id="1_ertfe"]
+[ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="2_jk5hm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31r1r"]
+atlas = ExtResource("2_jk5hm")
+region = Rect2(190, 133, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgsfj"]
+atlas = ExtResource("2_jk5hm")
+region = Rect2(190, 114, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_flxrq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31r1r")
+}],
+"loop": true,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgsfj")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7n8h"]
+size = Vector2(16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw3p5"]
+atlas = ExtResource("2_jk5hm")
+region = Rect2(152, 133, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sxmf"]
+atlas = ExtResource("2_jk5hm")
+region = Rect2(171, 133, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wdfu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw3p5")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sxmf")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0jl3"]
+size = Vector2(20, 10)
+
+[node name="gateAndSwitch" type="Node2D"]
+script = ExtResource("1_ertfe")
+
+[node name="gate" type="Node2D" parent="."]
+
+[node name="gatesprites" type="AnimatedSprite2D" parent="gate"]
+sprite_frames = SubResource("SpriteFrames_flxrq")
+animation = &"close"
+autoplay = "close"
+
+[node name="gateArea" type="StaticBody2D" parent="gate"]
+
+[node name="doorCollision" type="CollisionShape2D" parent="gate/gateArea"]
+shape = SubResource("RectangleShape2D_h7n8h")
+
+[node name="switch" type="Node2D" parent="."]
+position = Vector2(56, 0)
+
+[node name="switchSprites" type="AnimatedSprite2D" parent="switch"]
+sprite_frames = SubResource("SpriteFrames_8wdfu")
+animation = &"off"
+autoplay = "off"
+
+[node name="switchArea" type="Area2D" parent="switch"]
+gravity_space_override = 1
+
+[node name="switchCollision" type="CollisionShape2D" parent="switch/switchArea"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_b0jl3")
+
+[connection signal="area_entered" from="switch/switchArea" to="." method="_on_switch_area_area_entered"]
+[connection signal="area_exited" from="switch/switchArea" to="." method="_on_switch_area_area_exited"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce87nhojhc4ai"]
+
+[ext_resource type="Texture2D" uid="uid://dvlmy0ysr0ppc" path="res://assets/tilemap_packed.png" id="1_cka7p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6jf5"]
+atlas = ExtResource("1_cka7p")
+region = Rect2(198, 90, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68rho"]
+atlas = ExtResource("1_cka7p")
+region = Rect2(216, 90, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fnlk2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6jf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68rho")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujsqe"]
+size = Vector2(20, 35)
+
+[node name="flag" type="Area2D"]
+position = Vector2(694, -9)
+
+[node name="flagsprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fnlk2")
+autoplay = "default"
+frame_progress = 0.759474
+
+[node name="flagpolesprite" type="Sprite2D" parent="flagsprite"]
+position = Vector2(0, 16)
+texture = ExtResource("1_cka7p")
+region_enabled = true
+region_rect = Rect2(198, 108, 17, 17)
+
+[node name="flagColl" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_ujsqe")

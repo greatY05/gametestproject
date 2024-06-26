@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4nmppgjp1b7m"]
+
+[ext_resource type="Script" path="res://scripts/Camera2D2.gd" id="1_s2ukf"]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2(569, -8)
+zoom = Vector2(2.39, 2.39)
+script = ExtResource("1_s2ukf")
+strenght = 5.0
+fade = 15.0
