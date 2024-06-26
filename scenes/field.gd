@@ -27,6 +27,7 @@ func _on_switch_body_entered(body):
 		if switchPressed == false:
 			switchPressed = true
 			print(switchPressed)
+			#3jesdfd
 			$switch/switchSprite.play("on")
 			$gateArea/doorCollision.set_deferred("disabled", true)
 			$gateArea/gatesprites.play("open")
