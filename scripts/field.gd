@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var box = $RigidBody2D
+@onready var box = $box
 @onready var doorCollision = $gateArea
 @onready var key = $key
 

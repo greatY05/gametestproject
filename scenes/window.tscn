@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckacn1eecetef"]
 
-[ext_resource type="Script" path="res://scenes/window.gd" id="1_djach"]
 [ext_resource type="Texture2D" uid="uid://ebg0blo8ubtb" path="res://icon.svg" id="1_f2ruv"]
+[ext_resource type="Script" path="res://scripts/window.gd" id="1_fa2s3"]
 
 [node name="Window" type="Window"]
 position = Vector2i(0, 36)
@@ -10,7 +10,7 @@ unresizable = true
 always_on_top = true
 min_size = Vector2i(240, 320)
 max_size = Vector2i(240, 320)
-script = ExtResource("1_djach")
+script = ExtResource("1_fa2s3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
