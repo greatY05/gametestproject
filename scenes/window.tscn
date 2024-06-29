@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckacn1eecetef"]
+[gd_scene load_steps=4 format=3 uid="uid://ckacn1eecetef"]
 
 [ext_resource type="Texture2D" uid="uid://ebg0blo8ubtb" path="res://icon.svg" id="1_f2ruv"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="1_fa2s3"]
+[ext_resource type="Texture2D" uid="uid://dmxdvhhqie6fj" path="res://assets/tilemap-characters_packed.png" id="3_pf3fs"]
 
 [node name="Window" type="Window"]
-position = Vector2i(0, 36)
+position = Vector2i(539, 116)
 size = Vector2i(240, 320)
 unresizable = true
 always_on_top = true
@@ -13,16 +14,26 @@ max_size = Vector2i(240, 320)
 script = ExtResource("1_fa2s3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(70, 70)
+zoom = Vector2(2, 2)
 
-[node name="Button" type="Button" parent="Camera2D"]
+[node name="click" type="Button" parent="Camera2D"]
 offset_right = 121.0
 offset_bottom = 31.0
 icon = ExtResource("1_f2ruv")
 flat = true
 
+[node name="fish" type="Sprite2D" parent="Camera2D"]
+visible = false
+texture_filter = 1
+scale = Vector2(9.72, 9.72)
+texture = ExtResource("3_pf3fs")
+offset = Vector2(6.95, 6.885)
+region_enabled = true
+region_rect = Rect2(125, 29, 13, 16)
+
 [node name="comboTimer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
-[connection signal="pressed" from="Camera2D/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Camera2D/click" to="." method="_on_click_pressed"]
 [connection signal="timeout" from="comboTimer" to="." method="_on_combo_timer_timeout"]

@@ -1,17 +1,19 @@
 extends Camera2D
 
-@export var strenght: float = 1
-@export var fade: float = 0.001
+@export var strenght: float = 5
+@export var fade: float = 15
 
 var rng = RandomNumberGenerator.new()
 
 var curStrenght: float = 0
 
-func apply_force():
-	curStrenght = strenght
+func apply_force(str, fd):
+	curStrenght = str
+	fade = fd
 
-func shake():
-	apply_force()
+#send a wanted strenght of shake and fade for it through calling the function shake
+func shake(str, fd):
+	apply_force(str, fd)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

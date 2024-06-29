@@ -6,5 +6,3 @@
 position = Vector2(569, -8)
 zoom = Vector2(2.39, 2.39)
 script = ExtResource("1_s2ukf")
-strenght = 5.0
-fade = 15.0

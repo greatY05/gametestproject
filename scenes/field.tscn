@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://b7ery6a6lhqbh"]
+[gd_scene load_steps=22 format=3 uid="uid://b7ery6a6lhqbh"]
 
 [ext_resource type="Texture2D" uid="uid://fnnh2pv2t5nt" path="res://assets/tilemap-backgrounds_packed.png" id="1_5vyak"]
 [ext_resource type="Script" path="res://scripts/field.gd" id="1_h3fw7"]
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="2_sncb2"]
 [ext_resource type="PackedScene" uid="uid://co8umhm3wlkg6" path="res://scenes/player.tscn" id="3_32rww"]
-[ext_resource type="Texture2D" uid="uid://dvlmy0ysr0ppc" path="res://assets/tilemap_packed.png" id="5_oeacu"]
 [ext_resource type="PackedScene" uid="uid://dml3hbwqr5pn7" path="res://scenes/gate_area.tscn" id="7_45g8x"]
 [ext_resource type="PackedScene" uid="uid://ba4pnybbc3j6c" path="res://scenes/key.tscn" id="7_51xgr"]
 [ext_resource type="PackedScene" uid="uid://c4nmppgjp1b7m" path="res://scenes/camera_2d.tscn" id="9_5s07f"]
@@ -784,9 +783,9 @@ sources/2 = SubResource("TileSetAtlasSource_wcykg")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7flgq"]
 size = Vector2(18, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cls67"]
-atlas = ExtResource("5_oeacu")
-region = Rect2(144, 126, 17, 17)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8rt6"]
+atlas = ExtResource("2_sncb2")
+region = Rect2(152, 133, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xv1i6"]
 atlas = ExtResource("2_sncb2")
@@ -796,7 +795,7 @@ region = Rect2(171, 133, 18, 18)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cls67")
+"texture": SubResource("AtlasTexture_v8rt6")
 }],
 "loop": true,
 "name": &"off",
@@ -1042,7 +1041,7 @@ collision_mask = 2
 
 [node name="switchSprite" type="AnimatedSprite2D" parent="switch"]
 sprite_frames = SubResource("SpriteFrames_u3p1j")
-animation = &"on"
+animation = &"off"
 autoplay = "off"
 
 [node name="switchColl" type="CollisionShape2D" parent="switch"]

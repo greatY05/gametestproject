@@ -5,18 +5,19 @@ extends Node2D
 @onready var doorCollision = $gateArea
 @onready var key = $key
 
+
+
 var isCollected = false
 
 func restart():
 	get_tree().reload_current_scene()
 
-const speed = 0.1
-func _process(_delta):
+const speed = 5
+func _process(delta):
 	if isCollected == true:
-		key.global_position = key.global_position.lerp($player/followPoint.global_position, speed) 
+		key.global_position = key.global_position.lerp($player/followPoint.global_position, speed*delta) 
 	if isCollected == false and gateUnlocked == true:
-		key.global_position = key.global_position.lerp($lockedGate/unlockArea.global_position, speed) 
-	
+		key.global_position = key.global_position.lerp($lockedGate/unlockArea.global_position, speed*delta) 
 	if Input.is_key_pressed(KEY_R):
 		restart()
 
@@ -41,8 +42,17 @@ func _on_switch_body_exited(_body):
 		$gateArea/doorCollision.set_deferred("disabled", false)
 		$gateArea/gatesprites.play("close")
 
+var pack = preload("res://scenes/window.tscn")
 
-
+func _input(event):
+	if event.is_action_pressed("action"):
+		var window = pack.instantiate()
+		#both get cords of things right to the screen transform, doesnt work though so just acts as regular .position, if confusing just return to it
+		var playerCords = get_viewport_transform() * (get_global_transform() * $player.position)
+		var windowCords = get_viewport_transform() * (get_global_transform() * Vector2(window.position.x, window.position.y))
+		add_child(window)
+		window.position = playerCords
+		print( playerCords, windowCords)
 
 func _on_key_body_entered(body):
 	if body.name == "player":
@@ -56,11 +66,10 @@ func _on_unlock_area_body_entered(_body):
 		isCollected = false
 		$key/keySprite.play("RESET")
 		$key.z_index += 1
-		
 		print("gate unlocked")
 		await get_tree().create_timer(0.5).timeout
 		$lockedGate/lockedGateColl.set_deferred("disabled", true)
-		$Camera2D.shake()
+		$Camera2D.shake(10,15)
 		$key/keySprite.play("destroy")
 		$key/keyColl/keyParticles.emitting = true
 		$lockedGate/lockedGateColl/blocks/AnimationPlayer.play("keyinserted")
