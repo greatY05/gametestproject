@@ -47,12 +47,20 @@ var pack = preload("res://scenes/window.tscn")
 func _input(event):
 	if event.is_action_pressed("action"):
 		var window = pack.instantiate()
+		#var ci: CanvasItem = window
+		#var root: Window = ci.get_tree().root
+		
+		#var ci_screen_pos: Vector2 = (root.get_final_transform() * ci.get_global_transform_with_canvas()).origin + Vector2(root.position)
+
+		#var ci_global_pos: Vector2 = ci.get_global_transform().origin
+		#var ci_screen_pos: Vector2 = (root.get_final_transform() * ci.get_canvas_transform()) * ci_global_pos + Vector2(root.position)
+		##
 		#both get cords of things right to the screen transform, doesnt work though so just acts as regular .position, if confusing just return to it
 		var playerCords = get_viewport_transform() * (get_global_transform() * $player.position)
-		var windowCords = get_viewport_transform() * (get_global_transform() * Vector2(window.position.x, window.position.y))
+		#var windowCords = get_viewport_transform() * (get_global_transform() * Vector2(window.position.x, window.position.y))
 		add_child(window)
 		window.position = playerCords
-		print( playerCords, windowCords)
+	#	print( playerCords, windowCords, $player.get_screen_transform())
 
 func _on_key_body_entered(body):
 	if body.name == "player":

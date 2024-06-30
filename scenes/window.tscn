@@ -33,6 +33,7 @@ region_enabled = true
 region_rect = Rect2(125, 29, 13, 16)
 
 [node name="comboTimer" type="Timer" parent="."]
+wait_time = 0.7
 one_shot = true
 
 [connection signal="pressed" from="Camera2D/click" to="." method="_on_click_pressed"]
