@@ -4,10 +4,20 @@ extends Node2D
 @onready var box = $box
 @onready var doorCollision = $gateArea
 @onready var key = $key
-
+@onready var switch = $switch
+var switchId = 0
 
 
 var isCollected = false
+
+var newSwitch = preload("res://scenes/switch.tscn")
+var newSwitchScript = preload("res://scripts/switch.gd")
+func _ready():
+	for i in 3:
+		var switchNew = newSwitch.instantiate()
+		print(switchNew)
+		#switchNew.id = i
+		#print(switchNew.id)
 
 func restart():
 	get_tree().reload_current_scene()
@@ -21,26 +31,28 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_R):
 		restart()
 
-var switchPressed = false
-func _on_switch_body_entered(body):
-	print($switch.get_overlapping_bodies())
-	if body.name == "player" or body.name == "box":
-		if switchPressed == false:
-			switchPressed = true
-			print(switchPressed)
-			#3jesdfdjryhffhfhngdjdgngn
-			$switch/switchSprite.play("on")
-			$gateArea/doorCollision.set_deferred("disabled", true)
-			$gateArea/gatesprites.play("open")
 
 
-func _on_switch_body_exited(_body):
-	print($switch.get_overlapping_bodies())
-	if $switch.get_overlapping_bodies().size() < 1:
-		switchPressed = false
-		$switch/switchSprite.play("off")
-		$gateArea/doorCollision.set_deferred("disabled", false)
-		$gateArea/gatesprites.play("close")
+#var switchPressed = false
+#func _on_switch_body_entered(body):
+	#print($switch.get_overlapping_bodies())
+	#if body.name == "player" or body.name == "box":
+		#if switchPressed == false:
+			#switchPressed = true
+			#print(switchPressed)
+			##3jesdfdjryhffhfhngdjdgngn
+			#$switch/switchSprite.play("on")
+			#$gateArea/doorCollision.set_deferred("disabled", true)
+			#$gateArea/gatesprites.play("open")
+#
+#
+#func _on_switch_body_exited(_body):
+	#print($switch.get_overlapping_bodies())
+	#if $switch.get_overlapping_bodies().size() < 1:
+		#switchPressed = false
+		#$switch/switchSprite.play("off")
+		#$gateArea/doorCollision.set_deferred("disabled", false)
+		#$gateArea/gatesprites.play("close")
 
 var pack = preload("res://scenes/window.tscn")
 

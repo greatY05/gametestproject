@@ -1,9 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://b7ery6a6lhqbh"]
+[gd_scene load_steps=19 format=3 uid="uid://b7ery6a6lhqbh"]
 
 [ext_resource type="Texture2D" uid="uid://fnnh2pv2t5nt" path="res://assets/tilemap-backgrounds_packed.png" id="1_5vyak"]
 [ext_resource type="Script" path="res://scripts/field.gd" id="1_h3fw7"]
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="2_sncb2"]
 [ext_resource type="PackedScene" uid="uid://co8umhm3wlkg6" path="res://scenes/player.tscn" id="3_32rww"]
+[ext_resource type="PackedScene" uid="uid://c7uugkl5xihm3" path="res://scenes/box.tscn" id="5_6qrko"]
+[ext_resource type="PackedScene" uid="uid://db45ygafnt256" path="res://scenes/switch.tscn" id="6_cmqi7"]
 [ext_resource type="PackedScene" uid="uid://dml3hbwqr5pn7" path="res://scenes/gate_area.tscn" id="7_45g8x"]
 [ext_resource type="PackedScene" uid="uid://ba4pnybbc3j6c" path="res://scenes/key.tscn" id="7_51xgr"]
 [ext_resource type="PackedScene" uid="uid://c4nmppgjp1b7m" path="res://scenes/camera_2d.tscn" id="9_5s07f"]
@@ -780,39 +782,6 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_j72mf")
 sources/2 = SubResource("TileSetAtlasSource_wcykg")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7flgq"]
-size = Vector2(18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v8rt6"]
-atlas = ExtResource("2_sncb2")
-region = Rect2(152, 133, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xv1i6"]
-atlas = ExtResource("2_sncb2")
-region = Rect2(171, 133, 18, 18)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_u3p1j"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v8rt6")
-}],
-"loop": true,
-"name": &"off",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xv1i6")
-}],
-"loop": true,
-"name": &"on",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm65n"]
-size = Vector2(16, 9)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btleu"]
 size = Vector2(18, 114)
 
@@ -1018,37 +987,13 @@ collision_mask = 3
 jumpTimeDescent = 0.2
 SPEED = 100.0
 
-[node name="box" type="RigidBody2D" parent="."]
-position = Vector2(554, -2)
-collision_layer = 2
-mass = 0.5
-gravity_scale = 1.5
-linear_damp = 3.0
-angular_damp = 100.0
+[node name="box" parent="." instance=ExtResource("5_6qrko")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="box"]
-shape = SubResource("RectangleShape2D_7flgq")
-
-[node name="Sprite2D" type="Sprite2D" parent="box"]
-texture = ExtResource("2_sncb2")
-region_enabled = true
-region_rect = Rect2(114, 19, 18, 18)
-
-[node name="switch" type="Area2D" parent="."]
-position = Vector2(584, 8)
-collision_layer = 3
-collision_mask = 2
-
-[node name="switchSprite" type="AnimatedSprite2D" parent="switch"]
-sprite_frames = SubResource("SpriteFrames_u3p1j")
-animation = &"off"
-autoplay = "off"
-
-[node name="switchColl" type="CollisionShape2D" parent="switch"]
-position = Vector2(0, 5.5)
-shape = SubResource("RectangleShape2D_cm65n")
+[node name="switch" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
+door = NodePath("../gateArea")
 
 [node name="gateArea" parent="." instance=ExtResource("7_45g8x")]
+position = Vector2(504, 10)
 
 [node name="key" parent="." instance=ExtResource("7_51xgr")]
 
@@ -1118,8 +1063,13 @@ shape = SubResource("RectangleShape2D_bj5ar")
 
 [node name="flag" parent="." instance=ExtResource("10_jo1u5")]
 
-[connection signal="body_entered" from="switch" to="." method="_on_switch_body_entered"]
-[connection signal="body_exited" from="switch" to="." method="_on_switch_body_exited"]
+[node name="gateArea2" parent="." instance=ExtResource("7_45g8x")]
+position = Vector2(648, 7)
+
+[node name="switch2" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
+position = Vector2(615, 7)
+door = NodePath("../gateArea2")
+
 [connection signal="body_entered" from="key" to="." method="_on_key_body_entered"]
 [connection signal="body_entered" from="lockedGate/unlockArea" to="." method="_on_unlock_area_body_entered"]
 [connection signal="body_entered" from="flag" to="." method="_on_flag_body_entered"]
