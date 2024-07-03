@@ -967,12 +967,13 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj5ar"]
-size = Vector2(31, 82)
+size = Vector2(35, 80)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_h3fw7")
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(-394, 2)
 tile_set = SubResource("TileSet_k3hu1")
 format = 2
 layer_0/name = "bg"
@@ -981,24 +982,30 @@ layer_1/name = "fg"
 layer_1/tile_data = PackedInt32Array(65562, 131074, 0, 65563, 131074, 0, 65564, 131074, 0, 65565, 131074, 0, 65561, 131074, 0, 65566, 131074, 0, 131097, 131074, 6, 131102, 196610, 6, 131098, 131074, 6, 131099, 131074, 6, 131100, 131074, 6, 131101, 131074, 6, 196633, 65538, 7, 196638, 196610, 7, 196637, 131074, 7, 196636, 131074, 7, 196634, 131074, 7, 196635, 131074, 7, 65567, 131074, 0, 65568, 131074, 0, 65569, 131074, 0, 65570, 131074, 0, 65571, 131074, 0, 65572, 131074, 0, 65573, 131074, 0, 65574, 131074, 0, 65575, 131074, 0, 65576, 131074, 0, 65577, 131074, 0, 65578, 131074, 0, 65579, 131074, 0, 65580, 131074, 0, 131115, 131074, 6, 131114, 131074, 6, 131113, 131074, 6, 131112, 131074, 6, 131111, 131074, 6, 131110, 131074, 6, 131109, 131074, 6, 131108, 131074, 6, 131107, 131074, 6, 131106, 131074, 6, 131105, 131074, 6, 131104, 131074, 6, 131103, 131074, 6, 196639, 131074, 7, 196640, 131074, 7, 196641, 131074, 7, 196642, 131074, 7, 196643, 131074, 7, 196644, 131074, 7, 196645, 131074, 7, 196646, 131074, 7, 196647, 131074, 7, 196648, 131074, 7, 196649, 131074, 7, 196650, 131074, 7, 196651, 131074, 7, 196652, 196610, 7, 131116, 196610, 6, -131041, 589826, 1, -196577, 589826, 1, -262113, 589826, 1, -327649, 589826, 1, -327650, 589826, 1, -327651, 589826, 1, -327652, 589826, 1, -327653, 589826, 1, -327654, 589826, 1, -327655, 589826, 1, -262119, 589826, 1, -196583, 589826, 1, -131047, 589826, 1, -65511, 589826, 1, 25, 589826, 1, -65505, 589826, 1, 65560, 131074, 0, 65582, 196610, 0, 65559, 65538, 0, 65581, 131074, 0, 131117, 196610, 7, 131096, 65538, 7)
 
 [node name="player" parent="." instance=ExtResource("3_32rww")]
-position = Vector2(493, -115)
+position = Vector2(100, -115)
 collision_layer = 3
 collision_mask = 3
 jumpTimeDescent = 0.2
 SPEED = 100.0
 
 [node name="box" parent="." instance=ExtResource("5_6qrko")]
+position = Vector2(161, -2)
 
 [node name="switch" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
+position = Vector2(191, 10)
 door = NodePath("../gateArea")
 
 [node name="gateArea" parent="." instance=ExtResource("7_45g8x")]
-position = Vector2(504, 10)
+position = Vector2(111, 10)
 
 [node name="key" parent="." instance=ExtResource("7_51xgr")]
+position = Vector2(60, 4)
+
+[node name="key2" parent="." instance=ExtResource("7_51xgr")]
+position = Vector2(85, 4)
 
 [node name="lockedGate" type="StaticBody2D" parent="."]
-position = Vector2(676, 3)
+position = Vector2(283, 6)
 
 [node name="lockedGateColl" type="CollisionShape2D" parent="lockedGate"]
 position = Vector2(0, -45)
@@ -1007,43 +1014,43 @@ shape = SubResource("RectangleShape2D_btleu")
 [node name="blocks" type="Node" parent="lockedGate/lockedGateColl"]
 
 [node name="Sprite2D" type="Sprite2D" parent="lockedGate/lockedGateColl/blocks"]
-position = Vector2(676, 6)
+position = Vector2(283, 9)
 texture = ExtResource("2_sncb2")
 region_enabled = true
 region_rect = Rect2(152, 19, 18, 18)
 
 [node name="Sprite2D2" type="Sprite2D" parent="lockedGate/lockedGateColl/blocks"]
-position = Vector2(676, -12)
+position = Vector2(283, -9)
 texture = ExtResource("2_sncb2")
 region_enabled = true
 region_rect = Rect2(152, 19, 18, 18)
 
 [node name="Sprite2D3" type="Sprite2D" parent="lockedGate/lockedGateColl/blocks"]
-position = Vector2(676, -30)
+position = Vector2(283, -27)
 texture = ExtResource("2_sncb2")
 region_enabled = true
 region_rect = Rect2(152, 19, 18, 18)
 
 [node name="Sprite2D4" type="Sprite2D" parent="lockedGate/lockedGateColl/blocks"]
-position = Vector2(694, -30)
+position = Vector2(301, -27)
 texture = ExtResource("2_sncb2")
 region_enabled = true
 region_rect = Rect2(152, 19, 18, 18)
 
 [node name="Sprite2D5" type="Sprite2D" parent="lockedGate/lockedGateColl/blocks"]
-position = Vector2(712, -30)
+position = Vector2(319, -27)
 texture = ExtResource("2_sncb2")
 region_enabled = true
 region_rect = Rect2(152, 19, 18, 18)
 
 [node name="Sprite2D6" type="Sprite2D" parent="lockedGate/lockedGateColl/blocks"]
-position = Vector2(712, -12)
+position = Vector2(319, -9)
 texture = ExtResource("2_sncb2")
 region_enabled = true
 region_rect = Rect2(152, 19, 18, 18)
 
 [node name="Sprite2D7" type="Sprite2D" parent="lockedGate/lockedGateColl/blocks"]
-position = Vector2(712, 6)
+position = Vector2(319, 9)
 texture = ExtResource("2_sncb2")
 region_enabled = true
 region_rect = Rect2(152, 19, 18, 18)
@@ -1056,20 +1063,24 @@ libraries = {
 [node name="unlockArea" type="Area2D" parent="lockedGate"]
 
 [node name="unlockColl" type="CollisionShape2D" parent="lockedGate/unlockArea"]
-position = Vector2(-5.5, -29)
+position = Vector2(-10, -28)
 shape = SubResource("RectangleShape2D_bj5ar")
 
 [node name="Camera2D" parent="." instance=ExtResource("9_5s07f")]
+position = Vector2(176, -8)
 
 [node name="flag" parent="." instance=ExtResource("10_jo1u5")]
+position = Vector2(301, -6)
 
 [node name="gateArea2" parent="." instance=ExtResource("7_45g8x")]
-position = Vector2(648, 7)
+position = Vector2(62, -88)
 
 [node name="switch2" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
-position = Vector2(615, 7)
+position = Vector2(29, -88)
 door = NodePath("../gateArea2")
 
 [connection signal="body_entered" from="key" to="." method="_on_key_body_entered"]
+[connection signal="body_entered" from="key2" to="." method="_on_key_body_entered"]
+[connection signal="area_entered" from="lockedGate/unlockArea" to="." method="_on_unlock_area_area_entered"]
 [connection signal="body_entered" from="lockedGate/unlockArea" to="." method="_on_unlock_area_body_entered"]
 [connection signal="body_entered" from="flag" to="." method="_on_flag_body_entered"]

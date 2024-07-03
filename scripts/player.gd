@@ -35,10 +35,10 @@ func _physics_process(delta):
 	#
 	if Input.is_action_pressed("left"):
 		animSprite.flip_h = false
-		$followPoint.position.x = 15
+		$followPoint.position.x = 20
 	elif Input.is_action_pressed("right"):
 		animSprite.flip_h = true
-		$followPoint.position.x = -15
+		$followPoint.position.x = -20
 	## Get the input direction and handle the movement/deceleration.
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
@@ -55,18 +55,33 @@ func _physics_process(delta):
 		animSprite.play("idle")
 
 	move_and_slide()
+	#handles key follwing you around and hopefully other items in the future
+	if pickupfollow == true:
+		for i in collectedItems:
+			#print(i)
+			i.global_position = i.global_position.lerp($followPoint.global_position, pickupSpeed*delta)
 	
-	
-	#if pickupfollow == true:
-		#enteredBody.global_position = enteredBody.global_position.lerp(global_position, followSpd*delta)
 
-
+var pickupSpeed = 5
 var pickupfollow = false
-var followSpd = 5
+
+var collectedItems : Array
 
 func _on_pickup_area_area_entered(area):
-	if area.name == "key":
-		get_parent().add_child(area)
-		print("key got")
-		area.get_node("keyColl").set_deferred("disabled", true)
+	print("new?")
+	#currently only accepts key due to me not messing with collision layers rn, but a collision layer should handle pickups instead
+	if area.name not in collectedItems and area.is_in_group("pickup"):
+		collectedItems.append(area)
+		print(collectedItems)
 		pickupfollow = true
+		area.get_node("keyColl").set_deferred("disabled", true)
+		
+		#await Engine.get_main_loop().process_frame
+		#area.reparent(self)
+		
+		#print("added child - ", area, " to myself ", self)
+		#area.isCollected = true
+
+
+
+

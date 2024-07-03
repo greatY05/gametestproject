@@ -2,11 +2,11 @@ extends Window
 
 var presscount = 1
 var combo = 0
-var shake = 40 
-var halfshake = (shake/2) 
+var shake := 40
+var halfshake := (shake/2) 
 @onready var click = $Camera2D/click
 
-func _process(delta):
+func _process(_delta):
 	if click.is_hovered():
 		click.flat = false
 

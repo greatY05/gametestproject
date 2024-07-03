@@ -12,12 +12,7 @@ var isCollected = false
 
 var newSwitch = preload("res://scenes/switch.tscn")
 var newSwitchScript = preload("res://scripts/switch.gd")
-func _ready():
-	for i in 3:
-		var switchNew = newSwitch.instantiate()
-		print(switchNew)
-		#switchNew.id = i
-		#print(switchNew.id)
+
 
 func restart():
 	get_tree().reload_current_scene()
@@ -26,7 +21,7 @@ const speed = 5
 func _process(delta):
 	#if isCollected == true:
 		#key.global_position = key.global_position.lerp($player/followPoint.global_position, speed*delta) 
-	if isCollected == false and gateUnlocked == true:
+	if gateUnlocked == true:
 		key.global_position = key.global_position.lerp($lockedGate/unlockArea.global_position, speed*delta) 
 	if Input.is_key_pressed(KEY_R):
 		restart()
@@ -70,19 +65,33 @@ func _on_key_body_entered(body):
 		#$key/keyColl.set_deferred("disabled", true)
 
 var gateUnlocked = false
-func _on_unlock_area_body_entered(_body):
-	if isCollected == true:
+func _on_unlock_area_body_entered(area):
+	print(area.name)
+	if area.is_in_group("pickup"):
+		print("key inserted")
 		gateUnlocked = true
-		isCollected = false
-		$key/keySprite.play("RESET")
-		$key.z_index += 1
+		area.z_index += 1
 		print("gate unlocked")
 		await get_tree().create_timer(0.5).timeout
 		$lockedGate/lockedGateColl.set_deferred("disabled", true)
 		$Camera2D.shake(10,15)
-		$key/keySprite.play("destroy")
-		$key/keyColl/keyParticles.emitting = true
+		area.get_node("keySprite").play("destroy")
+		area.get_node("keyParticles").emitting = true
 		$lockedGate/lockedGateColl/blocks/AnimationPlayer.play("keyinserted")
+		await area.get_node("keySprite").finished("destroy")
+		area.visible = false
+	#if isCollected == true:
+		#gateUnlocked = true
+		#isCollected = false
+		#$key/keySprite.play("RESET")
+		#$key.z_index += 1
+		#print("gate unlocked")
+		#await get_tree().create_timer(0.5).timeout
+		#$lockedGate/lockedGateColl.set_deferred("disabled", true)
+		#$Camera2D.shake(10,15)
+		#$key/keySprite.play("destroy")
+		#$key/keyColl/keyParticles.emitting = true
+		#$lockedGate/lockedGateColl/blocks/AnimationPlayer.play("keyinserted")
 		#await $key/keySprite.finished("destroy")
 		#$key.visible = false
 
@@ -90,3 +99,7 @@ func _on_unlock_area_body_entered(_body):
 func _on_flag_body_entered(body):
 	if body.name == "player":
 		get_tree().reload_current_scene()
+
+
+func _on_unlock_area_area_entered(area):
+	pass

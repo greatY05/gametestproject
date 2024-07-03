@@ -7,13 +7,13 @@ var rng = RandomNumberGenerator.new()
 
 var curStrenght: float = 0
 
-func apply_force(str, fd):
-	curStrenght = str
-	fade = fd
+func apply_force(stri, fad):
+	curStrenght = stri
+	fade = fad
 
 #send a wanted strenght of shake and fade for it through calling the function shake
-func shake(str, fd):
-	apply_force(str, fd)
+func shake(stri, fad):
+	apply_force(stri, fad)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
