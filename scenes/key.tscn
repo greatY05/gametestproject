@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://ba4pnybbc3j6c"]
+[gd_scene load_steps=10 format=3 uid="uid://ba4pnybbc3j6c"]
 
+[ext_resource type="Script" path="res://scripts/key.gd" id="1_3w3g2"]
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="1_6wg2s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a20f4"]
@@ -117,6 +118,7 @@ _data = {
 
 [node name="key" type="Area2D"]
 position = Vector2(453, 4)
+script = ExtResource("1_3w3g2")
 
 [node name="keyColl" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_a20f4")
@@ -148,3 +150,5 @@ autoplay = "normal"
 texture = ExtResource("1_6wg2s")
 region_enabled = true
 region_rect = Rect2(133, 19, 18, 18)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

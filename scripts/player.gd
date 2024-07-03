@@ -55,7 +55,18 @@ func _physics_process(delta):
 		animSprite.play("idle")
 
 	move_and_slide()
+	
+	
+	#if pickupfollow == true:
+		#enteredBody.global_position = enteredBody.global_position.lerp(global_position, followSpd*delta)
 
 
+var pickupfollow = false
+var followSpd = 5
 
-
+func _on_pickup_area_area_entered(area):
+	if area.name == "key":
+		get_parent().add_child(area)
+		print("key got")
+		area.get_node("keyColl").set_deferred("disabled", true)
+		pickupfollow = true

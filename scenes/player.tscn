@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://co8umhm3wlkg6"]
+[gd_scene load_steps=15 format=3 uid="uid://co8umhm3wlkg6"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_gmugc"]
 [ext_resource type="Texture2D" uid="uid://85hrvykj564s" path="res://assets/tilemap-characters.png" id="2_7m2a2"]
@@ -144,6 +144,9 @@ height = 12.0
 radius = 6.0
 height = 12.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnbor"]
+size = Vector2(22, 23)
+
 [node name="player" type="CharacterBody2D"]
 position = Vector2(322, 181)
 script = ExtResource("1_gmugc")
@@ -177,3 +180,11 @@ shape = SubResource("CapsuleShape2D_o8x8m")
 
 [node name="followPoint" type="Node2D" parent="."]
 position = Vector2(-3, 0)
+
+[node name="pickupArea" type="Area2D" parent="."]
+
+[node name="pickupColl" type="CollisionShape2D" parent="pickupArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_nnbor")
+
+[connection signal="area_entered" from="pickupArea" to="." method="_on_pickup_area_area_entered"]
