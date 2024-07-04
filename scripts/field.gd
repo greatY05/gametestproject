@@ -17,6 +17,8 @@ var newSwitchScript = preload("res://scripts/switch.gd")
 func restart():
 	get_tree().reload_current_scene()
 
+
+
 const speed = 5
 func _process(delta):
 	#if isCollected == true:
@@ -57,6 +59,8 @@ func _input(event):
 		var playerCords = get_viewport_transform() * (get_global_transform() * $player.position)
 		add_child(window)
 		window.position = playerCords
+	if event.is_action("esc"):
+		get_tree().quit()
 
 #
 func _on_key_body_entered(body):

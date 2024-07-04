@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://co8umhm3wlkg6"]
+[gd_scene load_steps=15 format=3 uid="uid://co8umhm3wlkg6"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_gmugc"]
 [ext_resource type="Texture2D" uid="uid://85hrvykj564s" path="res://assets/tilemap-characters.png" id="2_7m2a2"]
@@ -147,14 +147,12 @@ height = 12.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnbor"]
 size = Vector2(22, 23)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_opp7g"]
-size = Vector2(40, 38)
-
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_gmugc")
 jumpHeight = 40.0
 jumpTimePeak = 0.2
 jumpTimeDescent = 0.15
+SPEED = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -187,10 +185,5 @@ shape = SubResource("CapsuleShape2D_o8x8m")
 [node name="pickupColl" type="CollisionShape2D" parent="pickupArea"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_nnbor")
-
-[node name="dontMove" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="dontMove"]
-shape = SubResource("RectangleShape2D_opp7g")
 
 [connection signal="area_entered" from="pickupArea" to="." method="_on_pickup_area_area_entered"]

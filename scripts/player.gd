@@ -56,22 +56,58 @@ func _physics_process(delta):
 
 	move_and_slide()
 	#handles key follwing you around and hopefully other items in the future
+	
 	if pickupfollow == true:
 		for i in collectedItems:
-			#print(i)
-			i.global_position = i.global_position.lerp($followPoint.global_position, pickupSpeed*delta)
+			var dist = sqrt(abs(self.position.x - i.position.x)+abs(self.position.y - i.position.y))
+			if dist < 3:
+				dist = lerpf(dist, 0, 0.5)
+			
+			i.global_position = i.global_position.lerp($followPoint.global_position, 0.2*dist*pickupSpeed*delta)
+			#i.global_position = i.global_position.lerp($followPoint.global_position, pickupSpeed*delta)
+			#if $dontMove in i.get_overlapping_areas():
+				#print("wow")
+				#i.global_position = i.global_position.lerp(i.global_position, pickupSpeed*delta)
+			#var i = collectedItems[l]
+			#var distOld = distArr[l][0]
+			#var relOldPos = distArr[l][1]
+			##print(i)
+			#var rad = 3
+			#var dist = sqrt(abs(self.position.x - i.position.x)+abs(self.position.y - i.position.y))
+#
+			#var m = (i.position.y-self.position.y)/(i.position.x-self.position.x)
+			#var angle = atan(m)
+			#var relPosition = Vector2(rad*cos(angle), rad*sin(angle))
+			#relPosition.x = relPosition.x * -1 if i.position.x < self.position.x else relPosition.x
+			#relPosition.y = relPosition.y * -1 if i.position.y < self.position.y else relPosition.y
+			#
+			#if distOld>dist:
+				#dist = distOld
+				#relPosition = relOldPos
+			#else:
+				#distArr[l][0] = dist
+				#relPosition = relPosition*15/2.5 + global_position
+				#distArr[l][1] = relPosition
+				#
+			#print(dist)
+			
+			#var p = new Vector2()
+			
+
+			#i.global_position = i.global_position.lerp(relPosition, pickupSpeed*delta)
 	
 
 var pickupSpeed = 5
 var pickupfollow = false
 
 var collectedItems : Array
-
+var distArr : Array
 func _on_pickup_area_area_entered(area):
 	print("new?")
 	#currently only accepts key due to me not messing with collision layers rn, but a collision layer should handle pickups instead
 	if area.name not in collectedItems and area.is_in_group("pickup"):
 		collectedItems.append(area)
+		distArr.append([sqrt(abs(self.position.x - area.position.x)+abs(self.position.y - area.position.y)), self.position])
 		print(collectedItems)
 		pickupfollow = true
 		area.get_node("keyColl").set_deferred("disabled", true)
