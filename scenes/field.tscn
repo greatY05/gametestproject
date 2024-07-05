@@ -1002,7 +1002,7 @@ position = Vector2(111, 10)
 position = Vector2(60, 4)
 
 [node name="key2" parent="." instance=ExtResource("7_51xgr")]
-position = Vector2(85, 4)
+position = Vector2(34, -50)
 
 [node name="lockedGate" type="StaticBody2D" parent="."]
 position = Vector2(283, 6)
@@ -1066,30 +1066,27 @@ libraries = {
 position = Vector2(-10, -28)
 shape = SubResource("RectangleShape2D_bj5ar")
 
+[node name="hintTimer" type="Timer" parent="lockedGate"]
+one_shot = true
+
 [node name="Camera2D" parent="." instance=ExtResource("9_5s07f")]
-position = Vector2(176, -8)
+position = Vector2(174, -46)
 
 [node name="flag" parent="." instance=ExtResource("10_jo1u5")]
 position = Vector2(301, -6)
 
-[node name="gateArea2" parent="." instance=ExtResource("7_45g8x")]
-position = Vector2(62, -88)
+[node name="helpText" type="RichTextLabel" parent="."]
+offset_left = 67.0
+offset_top = 30.0
+offset_right = 297.0
+offset_bottom = 70.0
+theme_override_colors/default_color = Color(1, 1, 1, 0)
+bbcode_enabled = true
+text = "[wave] I need a key to open this... [/wave]"
+fit_content = true
+scroll_active = false
 
-[node name="switch2" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
-position = Vector2(29, -88)
-door = NodePath("../gateArea2")
-
-[node name="key3" parent="." instance=ExtResource("7_51xgr")]
-position = Vector2(233, -3)
-
-[node name="key4" parent="." instance=ExtResource("7_51xgr")]
-position = Vector2(199, -27)
-
-[node name="key5" parent="." instance=ExtResource("7_51xgr")]
-position = Vector2(150, -100)
-
-[connection signal="body_entered" from="key" to="." method="_on_key_body_entered"]
-[connection signal="body_entered" from="key2" to="." method="_on_key_body_entered"]
 [connection signal="area_entered" from="lockedGate/unlockArea" to="." method="_on_unlock_area_area_entered"]
 [connection signal="body_entered" from="lockedGate/unlockArea" to="." method="_on_unlock_area_body_entered"]
+[connection signal="timeout" from="lockedGate/hintTimer" to="." method="_on_hint_timer_timeout"]
 [connection signal="body_entered" from="flag" to="." method="_on_flag_body_entered"]

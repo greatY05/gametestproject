@@ -24,9 +24,10 @@ func _process(delta):
 	#if isCollected == true:
 		#key.global_position = key.global_position.lerp($player/followPoint.global_position, speed*delta) 
 	if gateUnlocked == true:
-		key.global_position = key.global_position.lerp($lockedGate/unlockArea.global_position, speed*delta) 
+		keyToUse.global_position = keyToUse.global_position.lerp($lockedGate/unlockArea.global_position, speed*delta) 
 	if Input.is_key_pressed(KEY_R):
 		restart()
+	
 
 
 
@@ -62,28 +63,33 @@ func _input(event):
 	if event.is_action("esc"):
 		get_tree().quit()
 
-#
-func _on_key_body_entered(body):
-	if body.name == "player":
-		isCollected = true
-		#$key/keyColl.set_deferred("disabled", true)
 
 var gateUnlocked = false
+#takes the first item (key) from the array which the player script stores the keys in
+var keyToUse : Node2D
+
 func _on_unlock_area_body_entered(area):
 	print(area.name)
-	if area.is_in_group("pickup"):
-		print("key inserted")
-		gateUnlocked = true
-		area.z_index += 1
-		print("gate unlocked")
-		await get_tree().create_timer(0.5).timeout
-		$lockedGate/lockedGateColl.set_deferred("disabled", true)
-		$Camera2D.shake(10,15)
-		area.get_node("keySprite").play("destroy")
-		area.get_node("keyParticles").emitting = true
-		$lockedGate/lockedGateColl/blocks/AnimationPlayer.play("keyinserted")
-		await area.get_node("keySprite").finished("destroy")
-		area.visible = false
+	if area.name == "player":
+		if $lockedGate/unlockArea.get_overlapping_areas().size() > 0 and area.collectedItems.size() == 0:
+			$lockedGate/hintTimer.start()
+		if area.collectedItems.size() > 0:
+		#the first key to enter the player and enter his carrying array, pops it out and uses it
+			keyToUse = area.collectedItems.pop_front()
+			print("key inserted")
+			gateUnlocked = true
+			keyToUse.z_index += 1
+			print("gate unlocked")
+			await get_tree().create_timer(0.5).timeout
+			$lockedGate/lockedGateColl.set_deferred("disabled", true)
+			$Camera2D.shake(10,15)
+			keyToUse.get_node("keySprite").play("destroy")
+			keyToUse.get_node("keyParticles").emitting = true
+			$lockedGate/lockedGateColl/blocks/AnimationPlayer.play("keyinserted")
+			if keyToUse.keyDest == true:
+				keyToUse.visible = false
+	
+	
 	#if isCollected == true:
 		#gateUnlocked = true
 		#isCollected = false
@@ -105,5 +111,17 @@ func _on_flag_body_entered(body):
 		get_tree().reload_current_scene()
 
 
-func _on_unlock_area_area_entered(area):
-	pass
+var transP = 0
+func _on_hint_timer_timeout():
+	for i in 5:
+		$helpText.add_theme_color_override("default_color", Color(1, 1, 1, transP))
+		print($helpText.get_theme_color("default_color"))
+		transP += 0.3
+		await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(5).timeout
+	for i in 5:
+		$helpText.add_theme_color_override("default_color", Color(1, 1, 1, transP))
+		print($helpText.get_theme_color("default_color"))
+		transP -= 0.4
+		await get_tree().create_timer(0.1).timeout
+	print("i might need to get a key to open this...")

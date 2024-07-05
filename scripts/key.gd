@@ -1,14 +1,9 @@
 extends Area2D
 
-#signal follow
-#var isCollected
-#var speed = 1
+var keyDest = false
 
 
-
-
-func _process(_delta):
-	#if isCollected == true:
-		#set_deferred("disabled", true)
-		#global_position = global_position.lerp(get_root().get_node("followPoint").global_position, speed*delta)
-	pass
+func _on_key_sprite_animation_finished(destroy):
+	if keyDest == false:
+		keyDest = true
+	else: print("already done")

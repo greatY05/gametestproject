@@ -16,7 +16,7 @@ func _on_body_entered(body):
 			door.changeState()
 
 
-func _on_body_exited(_body):
+func _on_body_exited(body):
 	#print(get_overlapping_bodies())
 	#print(get_overlapping_bodies())
 	if get_overlapping_bodies().size() < 1:

@@ -2,19 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="1_kdb4x"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7flgq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s21qp"]
 size = Vector2(18, 18)
 
 [node name="box" type="RigidBody2D"]
-position = Vector2(554, -2)
 collision_layer = 2
-mass = 0.5
-gravity_scale = 1.5
-linear_damp = 3.0
-angular_damp = 100.0
+mass = 1.5
+gravity_scale = 2.0
+lock_rotation = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_7flgq")
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_s21qp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_kdb4x")

@@ -10,4 +10,4 @@ func changeState():
 	elif !doorcollision.disabled:
 		gatesprites.play("open")
 		doorcollision.set_deferred("disabled", true)
-	
+	print("stateChanged")

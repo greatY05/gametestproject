@@ -23,13 +23,18 @@ func get_gravity() -> float:
 func jump():
 	velocity.y = jumpVel
 
+
+#stuff for pushable objects
+const pushForce = 15
+const minPushForce = 10
+
 func _physics_process(delta):
 	velocity.y += get_gravity() * delta
 	# Add the gravity.
 	#if not is_on_floor():
 		#velocity.y += gravity * delta
 	
-	## Handle jump.
+	#Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		jump()
 	#
@@ -39,39 +44,44 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("right"):
 		animSprite.flip_h = true
 		$followPoint.position.x = -20
+	
+	
 	## Get the input direction and handle the movement/deceleration.
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
-			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+			var pushForceRn = (pushForce * velocity.length() / SPEED) + minPushForce
+			c.get_collider().apply_central_impulse(-c.get_normal() * pushForce)
+		
+		
+		
+		
 	## As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
 	if direction:
 		velocity.x = direction * SPEED
 		
-		animSprite.play("walk")
+		animPlayer.play("walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		animSprite.play("idle")
+		animPlayer.play("idle")
 
 	move_and_slide()
 	#handles key follwing you around and hopefully other items in the future
 	
 	if pickupfollow == true:
 		for i in collectedItems:
-			var dist = sqrt(abs(self.position.x - i.position.x)+abs(self.position.y - i.position.y))
-			if dist < 3:
-				dist = lerpf(dist, 0, 0.5)
-			
-			i.global_position = i.global_position.lerp($followPoint.global_position, 0.2*dist*pickupSpeed*delta)
-			#i.global_position = i.global_position.lerp($followPoint.global_position, pickupSpeed*delta)
+			#var dist = sqrt(abs(self.position.x - i.position.x)+abs(self.position.y - i.position.y))
+			#if dist < 3:
+				#dist = lerpf(dist, 0, 0.5)
+			i.global_position = i.global_position.lerp($followPoint.global_position, pickupSpeed*delta)
 			#if $dontMove in i.get_overlapping_areas():
 				#print("wow")
 				#i.global_position = i.global_position.lerp(i.global_position, pickupSpeed*delta)
 			#var i = collectedItems[l]
 			#var distOld = distArr[l][0]
 			#var relOldPos = distArr[l][1]
-			##print(i)
+			#print(i)
 			#var rad = 3
 			#var dist = sqrt(abs(self.position.x - i.position.x)+abs(self.position.y - i.position.y))
 #
@@ -101,13 +111,11 @@ var pickupSpeed = 5
 var pickupfollow = false
 
 var collectedItems : Array
-var distArr : Array
 func _on_pickup_area_area_entered(area):
 	print("new?")
 	#currently only accepts key due to me not messing with collision layers rn, but a collision layer should handle pickups instead
 	if area.name not in collectedItems and area.is_in_group("pickup"):
 		collectedItems.append(area)
-		distArr.append([sqrt(abs(self.position.x - area.position.x)+abs(self.position.y - area.position.y)), self.position])
 		print(collectedItems)
 		pickupfollow = true
 		area.get_node("keyColl").set_deferred("disabled", true)
@@ -117,7 +125,5 @@ func _on_pickup_area_area_entered(area):
 		
 		#print("added child - ", area, " to myself ", self)
 		#area.isCollected = true
-
-
 
 

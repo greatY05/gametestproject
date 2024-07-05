@@ -3,8 +3,6 @@
 [ext_resource type="Script" path="res://scripts/key.gd" id="1_3w3g2"]
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="1_6wg2s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a20f4"]
-
 [sub_resource type="Curve" id="Curve_iqaq5"]
 _data = [Vector2(0.0449438, 1), 0.0, 0.0, 0, 0, Vector2(0.983146, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -12,6 +10,8 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_7q3js"]
 offsets = PackedFloat32Array(0, 0.993333)
 colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a20f4"]
 
 [sub_resource type="Animation" id="Animation_0yu50"]
 length = 0.001
@@ -119,10 +119,7 @@ _data = {
 [node name="key" type="Area2D" groups=["pickup"]]
 script = ExtResource("1_3w3g2")
 
-[node name="keyColl" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_a20f4")
-
-[node name="keyParticles" type="CPUParticles2D" parent="keyColl"]
+[node name="keyParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 20
 lifetime = 0.5
@@ -139,6 +136,9 @@ scale_amount_max = 10.0
 scale_amount_curve = SubResource("Curve_iqaq5")
 color_ramp = SubResource("Gradient_7q3js")
 
+[node name="keyColl" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a20f4")
+
 [node name="keySprite" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_g5yeg")
@@ -151,3 +151,4 @@ region_enabled = true
 region_rect = Rect2(133, 19, 18, 18)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="keySprite" to="." method="_on_key_sprite_animation_finished"]
