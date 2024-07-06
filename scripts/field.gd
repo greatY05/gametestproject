@@ -119,9 +119,9 @@ func _on_hint_timer_timeout():
 		transP += 0.3
 		await get_tree().create_timer(0.1).timeout
 	await get_tree().create_timer(5).timeout
-	for i in 5:
+	for i in 6:
 		$helpText.add_theme_color_override("default_color", Color(1, 1, 1, transP))
 		print($helpText.get_theme_color("default_color"))
-		transP -= 0.4
+		transP -= 0.3
 		await get_tree().create_timer(0.1).timeout
 	print("i might need to get a key to open this...")
