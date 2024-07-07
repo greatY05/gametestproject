@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var fallGrav : float = ((-2.0 * jumpHeight) / (jumpTimeDescent * jumpTimeDescent))* -1.0
 
 
-@export var SPEED = 300.0
+@export var SPEED = 100.0
 const JUMP_VELOCITY = -300.0
 @onready var animPlayer = $AnimationPlayer
 @onready var animSprite = $AnimatedSprite2D

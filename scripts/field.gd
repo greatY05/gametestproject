@@ -14,20 +14,17 @@ var newSwitch = preload("res://scenes/switch.tscn")
 var newSwitchScript = preload("res://scripts/switch.gd")
 
 
-func restart():
-	get_tree().reload_current_scene()
 
 
+@onready var unlock_area = $lockedGate/unlockArea
 
 const speed = 5
 func _process(delta):
 	#if isCollected == true:
 		#key.global_position = key.global_position.lerp($player/followPoint.global_position, speed*delta) 
 	if gateUnlocked == true:
-		keyToUse.global_position = keyToUse.global_position.lerp($lockedGate/unlockArea.global_position, speed*delta) 
-	if Input.is_key_pressed(KEY_R):
-		restart()
-	
+		keyToUse.global_position = keyToUse.global_position.lerp(unlock_area.global_position, speed*delta) 
+
 
 
 
@@ -69,7 +66,6 @@ var gateUnlocked = false
 var keyToUse : Node2D
 
 func _on_unlock_area_body_entered(area):
-	print(input.key_pressed())
 	print(area.name)
 	if area.name == "player" and gateUnlocked == false:
 		if $lockedGate/unlockArea.get_overlapping_areas().size() > 0 and area.collectedItems.size() == 0:
@@ -106,10 +102,11 @@ func _on_unlock_area_body_entered(area):
 		#await $key/keySprite.finished("destroy")
 		#$key.visible = false
 
-
-func _on_flag_body_entered(body):
-	if body.name == "player":
-		get_tree().reload_current_scene()
+##local change for scene, dont use, use thrtough flagt scene
+#func _on_flag_body_entered(body):
+	#if body.name == "player":
+		#get_tree().reload_current_scene()
+		#SceneManager.switch_scene("res://scenes/field2.tscn")
 
 
 var transP = 0

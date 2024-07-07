@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://cecmk05dymmrs"]
 
-[ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="1_dcd0f"]
-[ext_resource type="Script" path="res://scripts/field_2.gd" id="1_v2w8s"]
-[ext_resource type="Texture2D" uid="uid://ebg0blo8ubtb" path="res://icon.svg" id="2_5do61"]
+[ext_resource type="Script" path="res://scripts/windowpopup.gd" id="1_neaos"]
+[ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="2_pmh14"]
+[ext_resource type="Texture2D" uid="uid://ebg0blo8ubtb" path="res://icon.svg" id="3_eibuj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hjaug"]
-texture = ExtResource("1_dcd0f")
+texture = ExtResource("2_pmh14")
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -671,8 +671,8 @@ terrain_set_1/terrain_0/name = "ground"
 terrain_set_1/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_hjaug")
 
-[node name="field 2" type="Node2D"]
-script = ExtResource("1_v2w8s")
+[node name="windowtest" type="Node2D"]
+script = ExtResource("1_neaos")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_uslqp")
@@ -689,6 +689,6 @@ offset_top = 312.0
 offset_right = 640.0
 offset_bottom = 448.0
 text = "new pack"
-icon = ExtResource("2_5do61")
+icon = ExtResource("3_eibuj")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

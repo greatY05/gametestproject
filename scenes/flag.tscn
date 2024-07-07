@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce87nhojhc4ai"]
+[gd_scene load_steps=7 format=3 uid="uid://ce87nhojhc4ai"]
 
 [ext_resource type="Texture2D" uid="uid://dvlmy0ysr0ppc" path="res://assets/tilemap_packed.png" id="1_cka7p"]
+[ext_resource type="Script" path="res://scripts/flag.gd" id="1_y1cxo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h6jf5"]
 atlas = ExtResource("1_cka7p")
@@ -28,7 +29,8 @@ animations = [{
 size = Vector2(20, 35)
 
 [node name="flag" type="Area2D"]
-position = Vector2(694, -9)
+position = Vector2(0, -16)
+script = ExtResource("1_y1cxo")
 
 [node name="flagsprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fnlk2")
@@ -44,3 +46,5 @@ region_rect = Rect2(198, 108, 17, 17)
 [node name="flagColl" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_ujsqe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

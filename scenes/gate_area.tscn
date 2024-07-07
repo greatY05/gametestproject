@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dml3hbwqr5pn7"]
 
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="1_62x3o"]
-[ext_resource type="Script" path="res://scenes/gate_area.gd" id="1_qc5t6"]
+[ext_resource type="Script" path="res://scripts/gate_area.gd" id="1_ju5u2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3q5h"]
 size = Vector2(16, 18)
@@ -34,13 +34,12 @@ animations = [{
 }]
 
 [node name="gateArea" type="StaticBody2D"]
-script = ExtResource("1_qc5t6")
+script = ExtResource("1_ju5u2")
 
 [node name="doorCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l3q5h")
 
 [node name="gatesprites" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, 0)
 sprite_frames = SubResource("SpriteFrames_iei1j")
 animation = &"open"
 autoplay = "close"
