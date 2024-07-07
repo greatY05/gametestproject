@@ -38,7 +38,7 @@ func _process(delta):
 		#if switchPressed == false:
 			#switchPressed = true
 			#print(switchPressed)
-			##3jesdfdjryhffhfhngdjdgngn
+			#3jesdfdjryhffhfhngdjdgngn
 			#$switch/switchSprite.play("on")
 			#$gateArea/doorCollision.set_deferred("disabled", true)
 			#$gateArea/gatesprites.play("open")
@@ -69,8 +69,9 @@ var gateUnlocked = false
 var keyToUse : Node2D
 
 func _on_unlock_area_body_entered(area):
+	print(input.key_pressed())
 	print(area.name)
-	if area.name == "player":
+	if area.name == "player" and gateUnlocked == false:
 		if $lockedGate/unlockArea.get_overlapping_areas().size() > 0 and area.collectedItems.size() == 0:
 			$lockedGate/hintTimer.start()
 		if area.collectedItems.size() > 0:
@@ -118,7 +119,7 @@ func _on_hint_timer_timeout():
 		print($helpText.get_theme_color("default_color"))
 		transP += 0.3
 		await get_tree().create_timer(0.1).timeout
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(1).timeout
 	for i in 6:
 		$helpText.add_theme_color_override("default_color", Color(1, 1, 1, transP))
 		print($helpText.get_theme_color("default_color"))
