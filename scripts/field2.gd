@@ -2,6 +2,14 @@ extends Node2D
 
 @onready var blockCollArea = $block/blockCollArea
 
+
+
+func _ready():
+	SceneManager.curLevel = 1
+	var tween = get_tree().create_tween()
+	tween.tween_property($Camera2D, "position", Vector2(137, -0), 1).set_trans(Tween.TRANS_CUBIC)
+
+
 const speed = 5
 func _process(delta):
 	#if isCollected == true:

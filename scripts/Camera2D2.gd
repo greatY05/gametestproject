@@ -25,3 +25,9 @@ func _process(delta):
 #changes location of X and Y to create a shake
 func randoffset():
 	return Vector2(rng.randf_range(-strenght, strenght), rng.randf_range(-strenght, strenght))
+
+
+func on_level_done(x):
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", Vector2(x, -428), 1).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished

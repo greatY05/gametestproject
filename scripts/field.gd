@@ -14,9 +14,10 @@ var newSwitchScript = preload("res://scripts/switch.gd")
 
 
 func _ready():
+	SceneManager.curLevel = 0
 	$Camera2D.position.y -= 300
 	var tween = get_tree().create_tween()
-	tween.tween_property($Camera2D, "position", Vector2(174, -28), 1).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Camera2D, "position", Vector2($Camera2D.position.x, -28), 1).set_trans(Tween.TRANS_CUBIC)
 
 @onready var unlock_area = $lockedGate/unlockArea
 
@@ -30,26 +31,7 @@ func _process(delta):
 
 
 
-#var switchPressed = false
-#func _on_switch_body_entered(body):
-	#print($switch.get_overlapping_bodies())
-	#if body.name == "player" or body.name == "box":
-		#if switchPressed == false:
-			#switchPressed = true
-			#print(switchPressed)
-			#3jesdfdjryhffhfhngdjdgngn
-			#$switch/switchSprite.play("on")
-			#$gateArea/doorCollision.set_deferred("disabled", true)
-			#$gateArea/gatesprites.play("open")
-#
-#
-#func _on_switch_body_exited(_body):
-	#print($switch.get_overlapping_bodies())
-	#if $switch.get_overlapping_bodies().size() < 1:
-		#switchPressed = false
-		#$switch/switchSprite.play("off")
-		#$gateArea/doorCollision.set_deferred("disabled", false)
-		#$gateArea/gatesprites.play("close")
+
 
 var pack = preload("res://scenes/window.tscn")
 

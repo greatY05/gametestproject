@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce87nhojhc4ai"]
+[gd_scene load_steps=8 format=3 uid="uid://ce87nhojhc4ai"]
 
 [ext_resource type="Texture2D" uid="uid://dvlmy0ysr0ppc" path="res://assets/tilemap_packed.png" id="1_cka7p"]
 [ext_resource type="Script" path="res://scripts/flag.gd" id="1_y1cxo"]
@@ -28,6 +28,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujsqe"]
 size = Vector2(20, 35)
 
+[sub_resource type="Curve" id="Curve_sxshe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="flag" type="Area2D"]
 position = Vector2(0, -16)
 script = ExtResource("1_y1cxo")
@@ -46,5 +50,25 @@ region_rect = Rect2(198, 108, 17, 17)
 [node name="flagColl" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_ujsqe")
+
+[node name="winParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 16)
+emitting = false
+amount = 15
+lifetime = 0.5
+one_shot = true
+speed_scale = 0.7
+explosiveness = 0.81
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 25.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, -100)
+initial_velocity_min = 40.0
+initial_velocity_max = 180.0
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_sxshe")
+color = Color(1, 1, 0, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
