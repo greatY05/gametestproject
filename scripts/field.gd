@@ -3,7 +3,6 @@ extends Node2D
 
 @onready var box = $box
 @onready var doorCollision = $gateArea
-@onready var key = $key
 @onready var switch = $switch
 var switchId = 0
 
@@ -14,7 +13,10 @@ var newSwitch = preload("res://scenes/switch.tscn")
 var newSwitchScript = preload("res://scripts/switch.gd")
 
 
-
+func _ready():
+	$Camera2D.position.y -= 300
+	var tween = get_tree().create_tween()
+	tween.tween_property($Camera2D, "position", Vector2(174, -28), 1).set_trans(Tween.TRANS_CUBIC)
 
 @onready var unlock_area = $lockedGate/unlockArea
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://crbvmue07xkan"]
 
-[ext_resource type="Script" path="res://scenes/mainmenu.gd" id="1_2qkpo"]
+[ext_resource type="Script" path="res://scripts/mainmenu.gd" id="1_2qkpo"]
 [ext_resource type="FontFile" uid="uid://dy3oqkqhe8hbb" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="1_s6tg6"]
 
 [node name="Control" type="Control"]
@@ -12,44 +12,51 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2qkpo")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -759.0
+offset_top = -620.0
+offset_right = 2106.0
+offset_bottom = 1573.0
+color = Color(0.929412, 1, 1, 1)
+
 [node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 243.0
-offset_top = 127.0
-offset_right = 916.0
-offset_bottom = 199.0
+offset_left = 275.0
+offset_top = 155.0
+offset_right = 948.0
+offset_bottom = 227.0
+theme_override_colors/font_shadow_color = Color(0.26, 0.11466, 0.0364, 1)
+theme_override_constants/shadow_offset_x = -6
+theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/normal_font = ExtResource("1_s6tg6")
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
-text = "[wave] game shmame [/wave]"
+text = "[rainbow] [wave] game shmame [/wave] [/rainbow] "
 
 [node name="lvlSelect" type="Button" parent="."]
 layout_mode = 0
-offset_left = 394.0
-offset_top = 286.0
-offset_right = 665.0
-offset_bottom = 331.0
+offset_left = 426.0
+offset_top = 314.0
+offset_right = 697.0
+offset_bottom = 359.0
 theme_override_fonts/font = ExtResource("1_s6tg6")
-text = "Select Level"
+text = "PLay"
 
 [node name="quit" type="Button" parent="."]
 layout_mode = 0
-offset_left = 394.0
-offset_top = 363.0
-offset_right = 665.0
-offset_bottom = 408.0
+offset_left = 426.0
+offset_top = 391.0
+offset_right = 697.0
+offset_bottom = 436.0
 theme_override_fonts/font = ExtResource("1_s6tg6")
 text = "Quit Game"
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 90.0
-offset_right = 294.0
-offset_bottom = 196.0
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 324)
 
-[node name="Button" type="Button" parent="GridContainer"]
-layout_mode = 2
-
+[connection signal="button_down" from="lvlSelect" to="." method="_on_lvl_select_button_down"]
 [connection signal="button_up" from="lvlSelect" to="." method="_on_lvl_select_button_up"]
+[connection signal="mouse_entered" from="lvlSelect" to="." method="_on_lvl_select_mouse_entered"]
+[connection signal="mouse_exited" from="lvlSelect" to="." method="_on_lvl_select_mouse_exited"]
 [connection signal="button_up" from="quit" to="." method="_on_quit_button_up"]

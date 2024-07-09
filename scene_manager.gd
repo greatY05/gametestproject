@@ -8,7 +8,7 @@ func _ready():
 
 
 var curLevel = 0
-var levels : Array = ["res://scenes/field.tscn", "res://scenes/field2.tscn", "res://scenes/windowpopup.tscn"]
+var levels : Array = ["res://scenes/field.tscn", "res://scenes/field2.tscn", "res://scenes/mainmenu.tscn"]
 
 
 
@@ -30,6 +30,9 @@ func _input(event):
 		get_tree().quit()
 	if Input.is_key_pressed(KEY_R):
 		restart()
+	if Input.is_key_pressed(KEY_X):
+		var p = preload("res://scenes/mainmenu.tscn").instantiate()
+		p.colorshift()
 
 func restart():
 	switch_scene(levels[curLevel])
