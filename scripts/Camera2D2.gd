@@ -29,5 +29,5 @@ func randoffset():
 
 func on_level_done(x):
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "position", Vector2(x, -428), 1).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "position", Vector2(x, -428), 0.7).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished

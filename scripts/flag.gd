@@ -19,6 +19,6 @@ func _on_body_entered(body):
 		$winParticles.emitting = true
 		await get_tree().create_timer(0.5).timeout
 		camera.on_level_done(camX)
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.5).timeout
 		SceneManager.curLevel += 1 
 		change_scene(SceneManager.curLevel)
