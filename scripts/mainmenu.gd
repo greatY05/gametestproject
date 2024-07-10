@@ -14,9 +14,10 @@ func _ready():
 	tween = get_tree().create_tween()
 	colorShift()
 
-
+#stores the last color the tween was on to continue when the mouse leaves the button area
 var colorStopped
-
+#checks if you clicked start button to pause the tween animations
+var started = false
 var color = 0.4
 
 func colorShift():
@@ -25,14 +26,12 @@ func colorShift():
 	tween.tween_property($ColorRect, "color", Color(color, 0.8 , color, 1),2).set_trans(Tween.TRANS_SINE)
 	tween.tween_property($ColorRect, "color", Color(0.8, color , color, 1),2).set_trans(Tween.TRANS_SINE)
 	print(colorRect.color)
-	
-var started = false
+
+
 
 func _on_lvl_select_button_up():
 	started = true
-	colorRect.color = Color(0.874, 0.9647, 0.9607, 1)
 	var tweenCam = get_tree().create_tween()
-	tweenCam.tween_property($ColorRect, "color", Color(0.874, 0.9647, 0.9607, 1), 0.3).set_trans(Tween.TRANS_LINEAR)
 	tweenCam.tween_property($Camera2D, "position", Vector2(575, 1024), 1).set_trans(Tween.TRANS_CUBIC)
 	await tweenCam.finished
 	SceneManager.switch_scene(SceneManager.levels[0])
