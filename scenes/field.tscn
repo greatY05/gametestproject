@@ -210,6 +210,8 @@ jumpTimeDescent = 0.2
 
 [node name="box" parent="." instance=ExtResource("5_6qrko")]
 position = Vector2(161, -2)
+linear_damp_mode = 1
+linear_damp = 1.0
 
 [node name="switch" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
 position = Vector2(191, 10)

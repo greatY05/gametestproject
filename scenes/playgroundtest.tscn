@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://brxh133wj3jvj"]
+
+[ext_resource type="PackedScene" uid="uid://co8umhm3wlkg6" path="res://scenes/player.tscn" id="1_usxau"]
+[ext_resource type="PackedScene" uid="uid://c7uugkl5xihm3" path="res://scenes/box.tscn" id="2_c2o2k"]
+
+[sub_resource type="Gradient" id="Gradient_88moi"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 1, 0.976471, 0.713726, 0.572549, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i8bnx"]
+seed = 5
+frequency = 0.0145
+offset = Vector3(-322.58, 0, 0)
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ichmc"]
+width = 1000
+invert = true
+seamless = true
+as_normal_map = true
+color_ramp = SubResource("Gradient_88moi")
+noise = SubResource("FastNoiseLite_i8bnx")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b7uvo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kv4ju"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_taaep"]
+cull_mode = 1
+polygon = PackedVector2Array(83, 20, 209, 119, 201, 140, 252, 229, 313, 302, 153, 304, 86, 107)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-3, -53)
+color = Color(0.215686, 1, 1, 1)
+texture = SubResource("NoiseTexture2D_ichmc")
+texture_offset = Vector2(0, 2.4)
+polygon = PackedVector2Array(102, 196, 496, 196, 666, 103, 817, 103, 817, 244, 676, 244, 570, 293, 101, 293)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(4, 76)
+physics_material_override = SubResource("PhysicsMaterial_b7uvo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+material = SubResource("CanvasItemMaterial_kv4ju")
+polygon = PackedVector2Array(102, 197, 493, 198, 690, 108, 819, 104, 824, 247, 582, 288, 75, 264)
+
+[node name="player" parent="." instance=ExtResource("1_usxau")]
+position = Vector2(244, 125)
+
+[node name="box" parent="." instance=ExtResource("2_c2o2k")]
+position = Vector2(317, 172)
+
+[node name="box2" parent="." instance=ExtResource("2_c2o2k")]
+position = Vector2(402, 174)
+
+[node name="box3" parent="." instance=ExtResource("2_c2o2k")]
+position = Vector2(404, 147)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(337, 188)
+zoom = Vector2(2.665, 2.665)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_taaep")

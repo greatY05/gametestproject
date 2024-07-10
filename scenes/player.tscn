@@ -171,7 +171,6 @@ shape = SubResource("CapsuleShape2D_jbiuq")
 [node name="followPoint" type="Node2D" parent="."]
 
 [node name="pickupArea" type="Area2D" parent="."]
-visible = false
 
 [node name="pickupColl" type="CollisionShape2D" parent="pickupArea"]
 position = Vector2(0, 0.5)
