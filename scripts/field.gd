@@ -17,7 +17,7 @@ func _ready():
 	SceneManager.curLevel = 0
 	$Camera2D.position.y -= 300
 	var tween = get_tree().create_tween()
-	tween.tween_property($Camera2D, "position", Vector2($Camera2D.position.x, -28), 0.5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Camera2D, "position", Vector2($Camera2D.position.x, -28), SceneManager.camSpeed).set_trans(Tween.TRANS_CUBIC)
 
 @onready var unlock_area = $lockedGate/unlockArea
 

@@ -7,8 +7,7 @@ extends Node2D
 func _ready():
 	SceneManager.curLevel = 1
 	var tween = get_tree().create_tween()
-	tween.tween_property($Camera2D, "position", Vector2(137, -0), 0.5).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($Camera2D, "position", Vector2(137, 0), 0.5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Camera2D, "position", Vector2(137, 0), SceneManager.camSpeed).set_trans(Tween.TRANS_CUBIC)
 
 
 const speed = 5

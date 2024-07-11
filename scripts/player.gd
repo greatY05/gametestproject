@@ -25,7 +25,7 @@ func jump():
 
 
 #stuff for pushable objects
-const pushForce = 15
+const pushForce = 8
 const minPushForce = 10
 
 func _physics_process(delta):
@@ -46,13 +46,15 @@ func _physics_process(delta):
 		$followPoint.position.x = -20
 	
 	
-	## Get the input direction and handle the movement/deceleration.
+	# Get the input direction and handle the movement/deceleration.
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
-			var pushForceRn = (pushForce * velocity.length() / SPEED) + minPushForce
-			c.get_collider().apply_central_impulse(-c.get_normal() * pushForce)
-		
+			c.position.x += 50
+	#for i in get_slide_collision_count():
+		#var c = get_slide_collision(i)
+		#if c.get_collider() is RigidBody2D:
+			#c.get_collider().apply_central_impulse(-c.get_normal() * pushForce)
 		
 		
 		

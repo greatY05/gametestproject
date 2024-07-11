@@ -9,7 +9,7 @@ func _ready():
 
 var curLevel = 0
 var levels : Array = ["res://scenes/field.tscn", "res://scenes/field2.tscn", "res://scenes/mainmenu.tscn"]
-
+var camSpeed = 0.7
 
 
 func switch_scene(Path):
