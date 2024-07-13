@@ -34,7 +34,7 @@ func _on_lvl_select_button_up():
 	var tweenCam = get_tree().create_tween()
 	tweenCam.tween_property($Camera2D, "position", Vector2(575, 1024), 1).set_trans(Tween.TRANS_CUBIC)
 	await tweenCam.finished
-	SceneManager.switch_scene(SceneManager.levels[0])
+	SceneManager.switch_scene(SceneManager.levels[1])
 
 
 

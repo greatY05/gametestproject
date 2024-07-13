@@ -14,8 +14,7 @@ var newSwitchScript = preload("res://scripts/switch.gd")
 
 
 func _ready():
-	SceneManager.curLevel = 0
-	$Camera2D.position.y -= 300
+	SceneManager.curLevel = 1
 	var tween = get_tree().create_tween()
 	tween.tween_property($Camera2D, "position", Vector2($Camera2D.position.x, -28), SceneManager.camSpeed).set_trans(Tween.TRANS_CUBIC)
 

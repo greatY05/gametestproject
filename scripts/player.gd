@@ -50,12 +50,7 @@ func _physics_process(delta):
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
-			c.position.x += 50
-	#for i in get_slide_collision_count():
-		#var c = get_slide_collision(i)
-		#if c.get_collider() is RigidBody2D:
-			#c.get_collider().apply_central_impulse(-c.get_normal() * pushForce)
-		
+			c.get_collider().apply_central_impulse(-c.get_normal() * pushForce)
 		
 		
 	## As good practice, you should replace UI actions with custom gameplay actions.

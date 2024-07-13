@@ -8,7 +8,7 @@ func _ready():
 
 
 var curLevel = 0
-var levels : Array = ["res://scenes/field.tscn", "res://scenes/field2.tscn", "res://scenes/mainmenu.tscn"]
+var levels : Array = ["res://scenes/mainmenu.tscn", "res://scenes/field.tscn", "res://scenes/field2.tscn", "res://scenes/field3.tscn", "res://scenes/mainmenu.tscn"]
 var camSpeed = 0.7
 
 

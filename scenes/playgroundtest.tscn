@@ -1,27 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://brxh133wj3jvj"]
+[gd_scene load_steps=13 format=3 uid="uid://brxh133wj3jvj"]
 
+[ext_resource type="Script" path="res://scripts/playgroundtest.gd" id="1_g53ga"]
 [ext_resource type="Texture2D" uid="uid://ebg0blo8ubtb" path="res://icon.svg" id="1_l8dmu"]
 [ext_resource type="PackedScene" uid="uid://co8umhm3wlkg6" path="res://scenes/player.tscn" id="1_usxau"]
 [ext_resource type="PackedScene" uid="uid://c7uugkl5xihm3" path="res://scenes/box.tscn" id="2_c2o2k"]
 
 [sub_resource type="Gradient" id="Gradient_88moi"]
-interpolation_mode = 2
-colors = PackedColorArray(0, 0, 0, 1, 0.976471, 0.713726, 0.572549, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.792157, 0.580392, 0.145098, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_i8bnx"]
-seed = 5
-frequency = 0.0145
-offset = Vector3(-322.58, 0, 0)
-metadata/_preview_in_3d_space_ = true
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_njqyj"]
+noise_type = 3
+fractal_type = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ichmc"]
 width = 999
-invert = true
-seamless = true
-as_normal_map = true
+height = 500
+generate_mipmaps = false
 bump_strength = 15.0
+normalize = false
 color_ramp = SubResource("Gradient_88moi")
-noise = SubResource("FastNoiseLite_i8bnx")
+noise = SubResource("FastNoiseLite_njqyj")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b7uvo"]
 
@@ -35,14 +33,25 @@ polygon = PackedVector2Array(83, 20, 209, 119, 201, 140, 252, 229, 313, 302, 153
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rskv"]
 size = Vector2(36, 35)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0o1g"]
+size = Vector2(288, 20)
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_g53ga")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(373, 271)
+texture = ExtResource("1_l8dmu")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(1, 77)
 color = Color(0.215686, 1, 1, 1)
+antialiased = true
 texture = SubResource("NoiseTexture2D_ichmc")
 texture_offset = Vector2(0, 2.4)
-polygon = PackedVector2Array(102, 196, 496, 196, 691, 108, 817, 103, 817, 244, 676, 244, 570, 293, 101, 293)
+invert_enabled = true
+polygon = PackedVector2Array(102, 196, 496, 196, 691, 108, 824, 104, 828, 245, 570, 293, 101, 293)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(4, 76)
@@ -50,13 +59,13 @@ physics_material_override = SubResource("PhysicsMaterial_b7uvo")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 material = SubResource("CanvasItemMaterial_kv4ju")
-polygon = PackedVector2Array(102, 197, 493, 198, 690, 108, 819, 104, 824, 247, 582, 288, 75, 264)
+polygon = PackedVector2Array(99, 198, 493, 198, 690, 108, 819, 104, 824, 247, 582, 288, 75, 264)
 
 [node name="player" parent="." instance=ExtResource("1_usxau")]
 position = Vector2(244, 125)
 
 [node name="box" parent="." instance=ExtResource("2_c2o2k")]
-position = Vector2(317, 172)
+position = Vector2(359, 177)
 collision_mask = 3
 mass = 1.0
 
@@ -74,7 +83,9 @@ zoom = Vector2(2.665, 2.665)
 occluder = SubResource("OccluderPolygon2D_taaep")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(439, 201)
+position = Vector2(280, 191)
+collision_layer = 2
+collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 position = Vector2(-1.90735e-06, -0.499996)
@@ -84,3 +95,11 @@ texture = ExtResource("1_l8dmu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_8rskv")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(185, 234)
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(134, 0)
+shape = SubResource("RectangleShape2D_v0o1g")
