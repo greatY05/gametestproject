@@ -139,15 +139,16 @@ animations = [{
 radius = 6.0
 height = 12.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8io1"]
-size = Vector2(30, 21.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnbor"]
+size = Vector2(22, 23)
 
 [node name="player" type="CharacterBody2D"]
-collision_mask = 3
+collision_layer = 2
 script = ExtResource("1_gmugc")
 jumpHeight = 40.0
 jumpTimePeak = 0.2
 jumpTimeDescent = 0.15
+pushForce = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -173,7 +174,7 @@ shape = SubResource("CapsuleShape2D_jbiuq")
 [node name="pickupArea" type="Area2D" parent="."]
 
 [node name="pickupColl" type="CollisionShape2D" parent="pickupArea"]
-position = Vector2(0, -0.25)
-shape = SubResource("RectangleShape2D_y8io1")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_nnbor")
 
 [connection signal="area_entered" from="pickupArea" to="." method="_on_pickup_area_area_entered"]

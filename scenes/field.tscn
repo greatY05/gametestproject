@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b7ery6a6lhqbh"]
 
 [ext_resource type="Script" path="res://scripts/field.gd" id="1_h3fw7"]
-[ext_resource type="PackedScene" uid="uid://br6q6m6wfk7nb" path="res://scenes/tile_map.tscn" id="2_s4lig"]
+[ext_resource type="PackedScene" path="res://scenes/tile_map.tscn" id="2_s4lig"]
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="2_sncb2"]
 [ext_resource type="PackedScene" uid="uid://co8umhm3wlkg6" path="res://scenes/player.tscn" id="3_32rww"]
 [ext_resource type="PackedScene" uid="uid://c7uugkl5xihm3" path="res://scenes/box.tscn" id="5_6qrko"]
@@ -205,7 +205,6 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 1, 131072, 1, 2, 196608,
 
 [node name="player" parent="." instance=ExtResource("3_32rww")]
 position = Vector2(100, -115)
-collision_layer = 3
 jumpTimeDescent = 0.2
 
 [node name="box" parent="." instance=ExtResource("5_6qrko")]
@@ -215,6 +214,8 @@ linear_damp = 1.0
 
 [node name="switch" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
 position = Vector2(191, 10)
+collision_layer = 1
+collision_mask = 6
 door = NodePath("../gateArea")
 
 [node name="gateArea" parent="." instance=ExtResource("7_45g8x")]
@@ -222,6 +223,7 @@ position = Vector2(110, 10)
 
 [node name="lockedGate" type="StaticBody2D" parent="."]
 position = Vector2(283, 6)
+collision_mask = 7
 
 [node name="lockedGateColl" type="CollisionShape2D" parent="lockedGate"]
 position = Vector2(0, -45)
@@ -277,6 +279,7 @@ libraries = {
 }
 
 [node name="unlockArea" type="Area2D" parent="lockedGate"]
+collision_mask = 7
 
 [node name="unlockColl" type="CollisionShape2D" parent="lockedGate/unlockArea"]
 position = Vector2(-10, -28)

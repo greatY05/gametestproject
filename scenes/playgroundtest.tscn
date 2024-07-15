@@ -36,7 +36,7 @@ size = Vector2(36, 35)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0o1g"]
 size = Vector2(288, 20)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_g53ga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -63,10 +63,12 @@ polygon = PackedVector2Array(99, 198, 493, 198, 690, 108, 819, 104, 824, 247, 58
 
 [node name="player" parent="." instance=ExtResource("1_usxau")]
 position = Vector2(244, 125)
+collision_mask = 5
+pushForce = 5
 
 [node name="box" parent="." instance=ExtResource("2_c2o2k")]
 position = Vector2(359, 177)
-collision_mask = 3
+collision_mask = 5
 mass = 1.0
 
 [node name="box2" parent="." instance=ExtResource("2_c2o2k")]
@@ -84,8 +86,8 @@ occluder = SubResource("OccluderPolygon2D_taaep")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(280, 191)
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 position = Vector2(-1.90735e-06, -0.499996)

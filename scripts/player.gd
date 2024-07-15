@@ -25,8 +25,8 @@ func jump():
 
 
 #stuff for pushable objects
-const pushForce = 8
-const minPushForce = 10
+@export var pushForce = 15
+
 
 func _physics_process(delta):
 	velocity.y += get_gravity() * delta

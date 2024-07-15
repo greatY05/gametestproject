@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw5av0iwprnij"]
+
+[ext_resource type="Script" path="res://scripts/Polygon2D.gd" id="1_ojraq"]
+
+[node name="Polygon2D" type="Polygon2D"]
+script = ExtResource("1_ojraq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(24, 36, 222, 207, 471, 211, 601, 71, 654, 127, 532, 267, 217, 275, -10, 78)
