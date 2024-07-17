@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://c12fy1sau401y"]
+
+[ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="1_mjpbx"]
+[ext_resource type="Script" path="res://scenes/trampoline.gd" id="1_ya7no"]
+[ext_resource type="Texture2D" uid="uid://dvlmy0ysr0ppc" path="res://assets/tilemap_packed.png" id="2_7x2bh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id5v2"]
+atlas = ExtResource("1_mjpbx")
+region = Rect2(152, 95, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqsd"]
+atlas = ExtResource("2_7x2bh")
+region = Rect2(126, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7ukc"]
+atlas = ExtResource("1_mjpbx")
+region = Rect2(133, 95, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d4pcr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id5v2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id5v2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqsd")
+}],
+"loop": false,
+"name": &"active",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7ukc")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gu3x"]
+size = Vector2(14, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dos1a"]
+size = Vector2(12, 4)
+
+[node name="trampo" type="Area2D"]
+collision_mask = 7
+script = ExtResource("1_ya7no")
+
+[node name="trampoSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d4pcr")
+animation = &"active"
+autoplay = "off"
+
+[node name="trampoColl" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_0gu3x")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_dos1a")
+one_way_collision = true
+debug_color = Color(0.948346, 2.69532e-06, 0.578754, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -6,7 +6,7 @@ var switchPressed = false
 
 func _on_body_entered(body):
 	#print(get_overlapping_bodies())
-	if body.name == "player" or body.name == "box":
+	if body.name == "player" or body.name == "box" or body is RigidBody2D:
 		if switchPressed == false:
 			switchPressed = true
 			#print(switchPressed)

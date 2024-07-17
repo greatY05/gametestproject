@@ -864,12 +864,14 @@ position = Vector2(511, 231)
 
 [node name="player" parent="." instance=ExtResource("8_58k1o")]
 position = Vector2(399, 269)
+collision_mask = 5
 
 [node name="Camera2D" parent="." instance=ExtResource("9_cde3d")]
 position = Vector2(545, -42)
 
 [node name="spikezone" type="Area2D" parent="."]
 position = Vector2(568, 279)
+collision_mask = 7
 
 [node name="spikeColl" type="CollisionShape2D" parent="spikezone"]
 position = Vector2(-8, 8)

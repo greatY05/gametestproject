@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfo8b6qpo354h"]
+
+[ext_resource type="Script" path="res://scripts/RigidBody2D.gd" id="1_ntux5"]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+script = ExtResource("1_ntux5")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]

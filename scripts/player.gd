@@ -20,8 +20,9 @@ var push_force = 30
 func get_gravity() -> float:
 	return jumpGrav if velocity.y < 0 else fallGrav
 
-func jump():
-	velocity.y = jumpVel
+func jump(Jvel):
+	print(Jvel)
+	velocity.y = Jvel
 
 
 #stuff for pushable objects
@@ -35,8 +36,8 @@ func _physics_process(delta):
 		#velocity.y += gravity * delta
 	
 	#Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		jump()
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		jump(jumpVel)
 	#
 	if Input.is_action_pressed("left"):
 		animSprite.flip_h = false
