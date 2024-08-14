@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7ym61basl80c"]
+
+[ext_resource type="Script" path="res://scenes/hud.gd" id="1_6g1ld"]
+
+[node name="hud" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_6g1ld")
+
+[node name="pause screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="pause screen"]
+modulate = Color(0, 0, 0, 0.317647)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 646.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pause screen"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 150.0
+offset_right = 882.0
+offset_bottom = 476.0
+alignment = 1
+
+[node name="Label" type="Label" parent="pause screen/VBoxContainer"]
+layout_mode = 2
+text = "paused"
+horizontal_alignment = 1
+
+[node name="continueButton" type="Button" parent="pause screen/VBoxContainer"]
+layout_mode = 2
+text = "continue"
+
+[node name="mainMenuButton" type="Button" parent="pause screen/VBoxContainer"]
+layout_mode = 2
+text = "main menu"
+
+[connection signal="button_up" from="pause screen/VBoxContainer/continueButton" to="." method="_on_continue_button_button_up"]
+[connection signal="button_up" from="pause screen/VBoxContainer/mainMenuButton" to="." method="_on_main_menu_button_button_up"]

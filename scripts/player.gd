@@ -51,7 +51,7 @@ func _physics_process(delta):
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is CharacterBody2D:
-			c.get_collider().slide(-c.get_normal() * pushForce * (SPEED/25))
+			c.get_collider().slide(-c.get_normal() * pushForce * (SPEED/15))
 		
 		
 	## As good practice, you should replace UI actions with custom gameplay actions.

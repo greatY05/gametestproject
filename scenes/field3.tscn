@@ -860,7 +860,7 @@ position = Vector2(691, 265)
 camera = NodePath("../Camera2D")
 
 [node name="box" parent="." instance=ExtResource("4_cv355")]
-position = Vector2(511, 231)
+position = Vector2(559, 221)
 
 [node name="player" parent="." instance=ExtResource("8_58k1o")]
 position = Vector2(399, 269)
