@@ -89,4 +89,7 @@ polygon = PackedVector2Array(-115, -38, -115, 28, 232, 0, 232, -36, 276, -36, 27
 position = Vector2(249, 169)
 
 [node name="Node2D" parent="." instance=ExtResource("9_6fnpp")]
-position = Vector2(96, 230)
+position = Vector2(271, 217)
+
+[node name="Node2D2" parent="." instance=ExtResource("9_6fnpp")]
+position = Vector2(215, 222)

@@ -8,7 +8,7 @@ func _ready():
 	$"pause screen".hide()
 
 func _input(event):
-	if event.is_action_pressed("jump") and disabled == false:
+	if event.is_action_pressed("esc") and disabled == false:
 		pause()
 
 
@@ -32,4 +32,3 @@ func toggle():
 	visible = !visible
 	print("toggled")
 	disabled = !disabled
-

@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b7ery6a6lhqbh"]
 
 [ext_resource type="Script" path="res://scripts/field.gd" id="1_h3fw7"]
-[ext_resource type="PackedScene" uid="uid://br6q6m6wfk7nb" path="res://scenes/tile_map.tscn" id="2_s4lig"]
+[ext_resource type="PackedScene" path="res://scenes/tile_map.tscn" id="2_s4lig"]
 [ext_resource type="Texture2D" uid="uid://c33gusaxjpdik" path="res://assets/tilemap.png" id="2_sncb2"]
 [ext_resource type="PackedScene" uid="uid://co8umhm3wlkg6" path="res://scenes/player.tscn" id="3_32rww"]
 [ext_resource type="PackedScene" uid="uid://c7uugkl5xihm3" path="res://scenes/box.tscn" id="5_6qrko"]
@@ -209,8 +209,11 @@ collision_layer = 6
 collision_mask = 5
 jumpTimeDescent = 0.2
 
+[node name="box2" parent="." instance=ExtResource("5_6qrko")]
+position = Vector2(164, -30)
+
 [node name="box" parent="." instance=ExtResource("5_6qrko")]
-position = Vector2(161, -2)
+position = Vector2(-3, -119)
 
 [node name="switch" parent="." node_paths=PackedStringArray("door") instance=ExtResource("6_cmqi7")]
 position = Vector2(191, 10)
@@ -305,6 +308,7 @@ text = "[wave] I need a key to open this... [/wave]"
 fit_content = true
 scroll_active = false
 
+[connection signal="area_entered" from="TileMap/key" to="TileMap/key" method="_on_area_entered"]
 [connection signal="area_entered" from="lockedGate/unlockArea" to="." method="_on_unlock_area_area_entered"]
 [connection signal="body_entered" from="lockedGate/unlockArea" to="." method="_on_unlock_area_body_entered"]
 [connection signal="timeout" from="lockedGate/hintTimer" to="." method="_on_hint_timer_timeout"]

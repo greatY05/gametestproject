@@ -17,12 +17,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var push_force = 30
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 
-func get_gravity() -> float:
-	return jumpGrav if velocity.y < 0 else fallGrav
+#func get_gravity() -> float:
+	#return jumpGrav if velocity.y < 0 else fallGrav
 
 func jump(Jvel):
 	print(Jvel)
-	velocity.y = Jvel
+	velocity.y = Jvel / 1.5
 
 
 #stuff for pushable objects
@@ -30,10 +30,10 @@ func jump(Jvel):
 
 
 func _physics_process(delta):
-	velocity.y += get_gravity() * delta
+	#velocity.y += get_gravity() * delta
 	# Add the gravity.
-	#if not is_on_floor():
-		#velocity.y += gravity * delta
+	if not is_on_floor():
+		velocity.y += gravity * delta
 	
 	#Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -52,6 +52,8 @@ func _physics_process(delta):
 		var c = get_slide_collision(i)
 		if c.get_collider() is CharacterBody2D:
 			c.get_collider().slide(-c.get_normal() * pushForce * (SPEED/15))
+		if c.get_collider() is RigidBody2D:
+			c.get_collider().apply_force(-c.get_normal() * pushForce * (SPEED))
 		
 		
 	## As good practice, you should replace UI actions with custom gameplay actions.
@@ -82,7 +84,6 @@ func _physics_process(delta):
 			#print(i)
 			#var rad = 3
 			#var dist = sqrt(abs(self.position.x - i.position.x)+abs(self.position.y - i.position.y))
-#
 			#var m = (i.position.y-self.position.y)/(i.position.x-self.position.x)
 			#var angle = atan(m)
 			#var relPosition = Vector2(rad*cos(angle), rad*sin(angle))
@@ -96,14 +97,10 @@ func _physics_process(delta):
 				#distArr[l][0] = dist
 				#relPosition = relPosition*15/2.5 + global_position
 				#distArr[l][1] = relPosition
-				#
 			#print(dist)
-			
 			#var p = new Vector2()
-			
-
 			#i.global_position = i.global_position.lerp(relPosition, pickupSpeed*delta)
-	
+
 
 var pickupSpeed = 5
 var pickupfollow = false
@@ -123,5 +120,3 @@ func _on_pickup_area_area_entered(area):
 		
 		#print("added child - ", area, " to myself ", self)
 		#area.isCollected = true
-
-
